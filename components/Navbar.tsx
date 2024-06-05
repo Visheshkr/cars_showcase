@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import CustomButton from './CustomButton';
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
 const Navbar = () => {
   return (
@@ -9,19 +10,19 @@ const Navbar = () => {
         <nav className='max-w-[1440px] mx-auto flex justify-between items-center sm:px-16 px-6 py-4'>
             <Link href="/" className='flex justify-center items-center'>
                 <Image 
-                    src="/logo.svg"
-                    alt="Car Hub Logo"
-                    width={118}
+                    src="/StarExpo.png"
+                    alt="Star Expo Logo"
+                    width={150}
                     height={18}
-                    className='boject-contain'
+                    className='object-contain'
                 />
             </Link>
-
-            <CustomButton
-                title="Sign In"
-                btnType="button"
-                containerStyles='text-primary-blue rounded-full bg-white min-w-[130px]'
-            />
+            <SignedOut>
+          <SignInButton/>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
         </nav>
     </header>
   )

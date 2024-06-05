@@ -8,6 +8,7 @@ import SearchManufacturer from './SearchManufacturer';
 import CarCard from './CarCard';
 import CarDetails from './CarDetails';
 import ShowMore from './ShowMore';
+import UserReview from './UserReview';
 export {
     Hero,
     CustomButton,
@@ -19,4 +20,5 @@ export {
     CarCard,
     CarDetails,
     ShowMore,
+    UserReview,
 }

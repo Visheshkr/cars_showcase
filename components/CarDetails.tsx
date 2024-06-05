@@ -2,15 +2,18 @@
 
 import { CarProps } from "@/types";
 import Image from "next/image";
-import { Fragment } from "react";
+import { Fragment, useMemo } from 'react';
 import { Dialog,Transition } from '@headlessui/react';
+import { arr_images,arr_images_angle1,arr_images_angle2,arr_images_angle3,link_arr } from "./carData";
 interface CarDetailsProps{
     isOpen:boolean;
     closeModal:()=>void;
     car:CarProps;
+    index:number;
 }
 
-const CarDetails = ({isOpen,closeModal,car}:CarDetailsProps) => {
+const CarDetails = ({isOpen,closeModal,car,index}:CarDetailsProps) => {
+    const user_rating = useMemo(()=>Math.floor(Math.random()*10),[index]);
   return (
     <>
         <Transition appear show={isOpen} as={Fragment}>
@@ -53,21 +56,20 @@ const CarDetails = ({isOpen,closeModal,car}:CarDetailsProps) => {
                                 className="object-contain"
                             />
                         </button>
-
                         <div className="flex-1 flex flex-col gap-3">
                             <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
-                            <Image src="/hero.png"  alt='car model' fill priority className='object-contain'/>
+                            <Image src={arr_images[index]}  alt='car model' fill priority className='object-contain'/>
                             </div>
 
                             <div className="flex gap-3">
                                 <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
-                                    <Image src="/hero.png"  alt='car model' fill priority className='object-contain'/>
+                                    <Image src={arr_images_angle1[index]}  alt='car model' fill priority className='object-contain'/>
                                 </div>
                                 <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
-                                    <Image src="/hero.png"  alt='car model' fill priority className='object-contain'/>
+                                    <Image src={arr_images_angle2[index]}  alt='car model' fill priority className='object-contain'/>
                                 </div>
                                 <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
-                                    <Image src="/hero.png"  alt='car model' fill priority className='object-contain'/>
+                                    <Image src={arr_images_angle3[index]}  alt='car model' fill priority className='object-contain'/>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +86,20 @@ const CarDetails = ({isOpen,closeModal,car}:CarDetailsProps) => {
                                         <p className="text-black-100 font-semibold">{value}</p>
                                     </div> 
                                 ))}
+                            </div>
+
+                            <div className="mt-3 flex flex-wrap gap-4">
+                                    <div className="flex justify-between gap-5 w-full text-right" >
+                                        <h4 className="text-grey capitalize">User Rating</h4>
+                                        <p className="text-black-100 font-semibold">{user_rating}/10</p>
+                                    </div> 
+                            </div>
+
+                            <div className="mt-3 flex flex-wrap gap-4">
+                                    <div className="flex justify-between gap-5 w-full text-right" >
+                                        <h4 className="text-grey capitalize">More Details</h4>
+                                        <p className="text-black-100 font-semibold"><a className="text-slate-600 underline" href={link_arr[index]}>Details</a></p>
+                                    </div> 
                             </div>
                         </div>
                     </Dialog.Panel>

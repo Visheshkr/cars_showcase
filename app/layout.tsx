@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Footer, Navbar } from "@/components";
-
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
 
 export const metadata: Metadata = {
-  title: "Car Hub",
+  title: "Star Expo",
   description: "Discover the best cars in the world",
 };
 
@@ -14,6 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className="relative">
         <Navbar />
@@ -21,5 +24,6 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
+    </ClerkProvider>
   );
 }

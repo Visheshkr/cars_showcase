@@ -1,18 +1,22 @@
 "use client";
 
 import Image from 'next/image';
-import {useState} from 'react'
+import {useMemo, useState} from 'react'
 import { CarProps } from '@/types';
 import CustomButton from './CustomButton';
 import { calculateCarRent} from '@/utils';
 import CarDetails from './CarDetails';
 interface CarCardProps{
     car:CarProps;
+    index:number;
 }
-const CarCard = ({car}:CarCardProps) => {
+const arr_images = ["/lambo.jpg","/audi.jpg","/acura.jpg","/audir8.jpg","/bmw.jpg","/kiatelluride.jpg","/hyundaitucson.jpg","/hondaodyssey.jpg","/bmwi8.jpg","/hemessey.jpg","/kia.jpg","/lotus.jpg","/porsche.jpg","/maserati.jpg","/kiasport.jpg","/kiasport.jpg","/mistubshioutlander.jpg","/genesis.jpg","/bentley.jpg","/lykan.jpg","/lambo2.jpg","/alpha.jpg","/ferrari.jpg","/gta.jpg","/jaguar.jpg","/koein.jpg","/mustang.jpg","/verna.jpg","/alto.jpg","/chev.jpg","/mini.jpg","/tata.jpg","/lambo.jpg","/audi.jpg","/acura.jpg","/audir8.jpg","/bmw.jpg","/kiatelluride.jpg","/hyundaitucson.jpg","/hondaodyssey.jpg","/bmwi8.jpg","/hemessey.jpg","/lambo2.jpg","/alpha.jpg","/ferrari.jpg","/gta.jpg","/jaguar.jpg","/koein.jpg","/mustang.jpg","/verna.jpg","/alto.jpg","/chev.jpg","/mini.jpg"];
+const CarCard = ({car,index}:CarCardProps) => {
     const {city_mpg,year,make,model,transmission,drive}=car;
     const [isOpen ,setIsOpen] =useState(false);
+    const [countCars,setCountCars] = useState(0);
     const carRent = calculateCarRent(city_mpg,year);
+    const carPrice = useMemo(()=>carRent + (Math.floor(Math.random()*1000)+100),[carRent])
   return (
     <div className="car-card group">
         <div className='car-card__content'>
@@ -25,14 +29,11 @@ const CarCard = ({car}:CarCardProps) => {
             <span className='self-start text-[14px] font-semibold'>
                 $
             </span>
-                {carRent}
-            <span className='self-end text-[14px] font-medium'>
-                /day
-            </span>
+                {carPrice}
         </p>
 
         <div className='relative w-full h-40 my-3 object-contain'>
-            <Image src='/hero.png'  alt='car model' fill priority className='object-contain'/>
+            <Image src={arr_images[index]}  alt='car model' fill priority className='object-contain'/>
         </div>
 
         <div className='relative flex w-full mt-2'>
@@ -66,7 +67,7 @@ const CarCard = ({car}:CarCardProps) => {
                 />
             </div>
         </div>
-        <CarDetails isOpen={isOpen} closeModal={()=>setIsOpen(false)} car={car} />
+        <CarDetails isOpen={isOpen} closeModal={()=>setIsOpen(false)} car={car} index={index}/>
     </div>
   )
 }

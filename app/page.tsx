@@ -1,5 +1,5 @@
 "use client";
-import { CustomFilter, Hero, SearchBar,CarCard, ShowMore } from "@/components";
+import { CustomFilter, Hero, SearchBar,CarCard, ShowMore, UserReview } from "@/components";
 import { fuels, yearsOfProduction } from "@/constants";
 import { fetchCars } from "@/utils";
 import Image from "next/image";
@@ -63,7 +63,7 @@ export default  function Home() {
               {allCars.length > 0 ?(
                 <section>
                   <div className="home__cars-wrapper">
-                    {allCars?.map((car)=>( <CarCard car={car}/>))}
+                    {allCars?.map((car,index)=>( <CarCard car={car} index={index}/>))}
                   </div>
                     {loading && (
                       <div className="mt-16 w-full flex-center">
@@ -89,7 +89,7 @@ export default  function Home() {
                   <p>{allCars?.message}</p>
                 </div>
               )}
-
+              <UserReview/>
         </div>
     </main>
   );
